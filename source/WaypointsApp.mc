@@ -23,6 +23,18 @@ class WaypointsApp extends App.AppBase {
 
 }
 
+class StartDelegate extends Ui.BehaviorDelegate {
+
+	function createHashPicker() {
+		var title = new Ui.Text({:text=>"HASH", :locX=>Ui.LAYOUT_HALIGN_CENTER, :locY=>Ui.LAYOUT_VALIGN_TOP, :color=>Gfx.COLOR_WHITE});
+		return new Ui.Picker({:title => title,:pattern => [new NumberFactory(), new NumberFactory(), new NumberFactory()]});
+	}
+	
+	function onSelect() {
+		Ui.pushView(createHashPicker(), new HashDelegate(), Ui.SLIDE_DOWN );
+	}
+}
+
 class StartView extends Ui.View {
 
 	function onUpdate(dc) {
@@ -33,22 +45,21 @@ class StartView extends Ui.View {
 	}
 }
 
-class StartDelegate extends Ui.BehaviorDelegate {
-	
-	function onSelect() {
-		Ui.pushView(new Ui.TextPicker(""), new KeyboardListener(), Ui.SLIDE_DOWN );
-	}
-}
-
 var hash = "";
 
-class KeyboardListener extends Ui.TextPickerDelegate {
-    function onTextEntered(text, changed) {
-        hash = text;
+class HashDelegate extends Ui.PickerDelegate {
+	
+	function joinArray(array){
+		var text = "";
+		for (var i=0; i < array.size(); i+=1) {
+			text += array[i];
+		}
+		return text;
+	}
+	
+	function onAccept(values) {
+        hash = joinArray(values);
         Ui.pushView(new WaypointsView(), null, Ui.SLIDE_DOWN );
     }
-
-    function onCancel() {
-        Ui.popView(Ui.SLIDE_IMMEDIATE);
-    }
 }
+
