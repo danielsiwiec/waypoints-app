@@ -2,52 +2,46 @@ using Toybox.Application as App;
 using Toybox.WatchUi as Ui;
 using Toybox.Graphics as Gfx;
 
+var hash = "";
+
 class WaypointsApp extends App.AppBase {
 
     function initialize() {
         AppBase.initialize();
     }
 
-    //! onStart() is called on application start up
-    function onStart() {
-    }
-
-    //! onStop() is called when your application is exiting
-    function onStop() {
-    }
-
-    //! Return the initial view of your application here
     function getInitialView() {
-        return [ new StartView(), new StartDelegate() ];
+        return [ new ScreenClearingView() ];
     }
 
 }
 
-class StartDelegate extends Ui.BehaviorDelegate {
+class ScreenClearingView extends Ui.View {
+	function onLayout(dc) {
+		dc.setColor( Gfx.COLOR_BLACK, Gfx.COLOR_BLACK );
+	    dc.clear();
+	    dc.setColor( Gfx.COLOR_WHITE, Gfx.COLOR_TRANSPARENT );
+		Ui.pushView(new HashPicker(), new HashPickerDelegate(), Ui.SLIDE_DOWN);
+	}
+}
 
-	function createHashPicker() {
+class HashPicker extends Ui.Picker {
+
+	function initialize(){
 		var title = new Ui.Text({:text=>"HASH", :locX=>Ui.LAYOUT_HALIGN_CENTER, :locY=>Ui.LAYOUT_VALIGN_TOP, :color=>Gfx.COLOR_WHITE});
-		return new Ui.Picker({:title => title,:pattern => [new NumberFactory(), new NumberFactory(), new NumberFactory()]});
+		Ui.Picker.initialize({:title => title,:pattern => createNumberPattern(4)});
 	}
 	
-	function onSelect() {
-		Ui.pushView(createHashPicker(), new HashDelegate(), Ui.SLIDE_DOWN );
+	function createNumberPattern(count) {
+		var digits = new [count];
+		for (var i=0 ; i<count ; i+=1) {
+			digits[i] = new DigitFactory();
+		}
+		return digits;
 	}
 }
 
-class StartView extends Ui.View {
-
-	function onUpdate(dc) {
-		dc.setColor( Gfx.COLOR_BLACK, Gfx.COLOR_BLACK );
-        dc.clear();
-        dc.setColor( Gfx.COLOR_WHITE, Gfx.COLOR_TRANSPARENT );
-        dc.drawText(dc.getWidth()/2, dc.getHeight()*0.4, Gfx.FONT_MEDIUM, "ENTER HASH", Gfx.TEXT_JUSTIFY_CENTER);
-	}
-}
-
-var hash = "";
-
-class HashDelegate extends Ui.PickerDelegate {
+class HashPickerDelegate extends Ui.PickerDelegate {
 	
 	function joinArray(array){
 		var text = "";
@@ -56,10 +50,19 @@ class HashDelegate extends Ui.PickerDelegate {
 		}
 		return text;
 	}
-	
+
 	function onAccept(values) {
         hash = joinArray(values);
-        Ui.pushView(new WaypointsView(), null, Ui.SLIDE_DOWN );
+        Ui.pushView(new HashView(), new HashDelegate(), Ui.SLIDE_DOWN );
+    }
+    
+    function onCancel() {
+    	System.exit();
     }
 }
 
+class HashDelegate extends Ui.InputDelegate {
+	function onKey(){
+		System.exit();
+	}
+}

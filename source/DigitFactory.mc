@@ -1,7 +1,7 @@
 using Toybox.WatchUi as Ui;
 using Toybox.Graphics as Gfx;
 
-class NumberFactory extends Ui.PickerFactory {
+class DigitFactory extends Ui.PickerFactory {
     hidden var mFormatString;
     hidden var mFont;
 
