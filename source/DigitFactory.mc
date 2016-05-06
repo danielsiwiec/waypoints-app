@@ -13,6 +13,7 @@ class DigitFactory extends Ui.PickerFactory {
     function initialize() {
         mFont = Gfx.FONT_NUMBER_HOT;
         mFormatString = "%d";
+        PickerFactory.initialize();
     }
 
     function getDrawable(index, selected) {
