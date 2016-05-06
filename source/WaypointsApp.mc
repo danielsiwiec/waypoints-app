@@ -32,7 +32,7 @@ class HashPicker extends Ui.Picker {
 		Ui.Picker.initialize({:title => title,:pattern => createNumberPattern(4)});
 		WatchUi.requestUpdate();
 	}
-	
+
 	function createNumberPattern(count) {
 		var digits = new [count];
 		for (var i=0 ; i<count ; i+=1) {
@@ -43,7 +43,7 @@ class HashPicker extends Ui.Picker {
 }
 
 class HashPickerDelegate extends Ui.PickerDelegate {
-	
+
 	function joinArray(array){
 		var text = "";
 		for (var i=0; i < array.size(); i+=1) {
@@ -56,7 +56,7 @@ class HashPickerDelegate extends Ui.PickerDelegate {
         hash = joinArray(values);
         Ui.pushView(new HashView(), new HashDelegate(), Ui.SLIDE_DOWN );
     }
-    
+
     function onCancel() {
     	System.exit();
     }
@@ -65,5 +65,6 @@ class HashPickerDelegate extends Ui.PickerDelegate {
 class HashDelegate extends Ui.InputDelegate {
 	function onKey(){
 		System.exit();
+    return true;
 	}
 }
