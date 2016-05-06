@@ -3,6 +3,7 @@
 
         <iq:products>
             <iq:product id="fenix3"/>
+            <iq:product id="fenix3_hr"/>
         </iq:products>
 
         <iq:permissions>
@@ -11,7 +12,9 @@
         	<iq:uses-permission id="Positioning"/>
         </iq:permissions>
 
-        <iq:languages/>
+        <iq:languages>
+            <iq:language>eng</iq:language>
+        </iq:languages>
 
     </iq:application>
 </iq:manifest>

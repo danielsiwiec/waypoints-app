@@ -9,7 +9,6 @@ class HashView extends Ui.View {
 	var text;
 
     function callback(responseCode, data){
-    	System.println("DATA: " + data);
     	var lat = data["geo"]["lat"];
     	var long = data["geo"]["long"];
     	var name = data["name"];
@@ -20,10 +19,9 @@ class HashView extends Ui.View {
     }
 
     function onShow() {
-    	System.println("HASH: " + hash);
     	Comms.makeJsonRequest("https://garmin-waypoints.herokuapp.com/locations/" + hash, null, null, method(:callback));
     }
-    
+
     function onUpdate(dc) {
     	dc.setColor( Gfx.COLOR_BLACK, Gfx.COLOR_BLACK );
         dc.clear();
