@@ -6,4 +6,4 @@ resources/strings/strings.xml \
 source/WaypointsApp.mc \
 source/HashView.mc \
 source/DigitFactory.mc \
-source/HashPickerView.mc
+source/HashPicker.mc

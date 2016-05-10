@@ -1,12 +1,11 @@
 using Toybox.WatchUi as Ui;
 using Toybox.Graphics as Gfx;
 
-class HashPicker extends Ui.Picker {
+class HashPickerView extends Ui.Picker {
 
 	function initialize(){
 		var title = new Ui.Text({:text=>"HASH", :locX=>Ui.LAYOUT_HALIGN_CENTER, :locY=>Ui.LAYOUT_VALIGN_TOP, :color=>Gfx.COLOR_WHITE});
 		Ui.Picker.initialize({:title => title,:pattern => createNumberPattern(4)});
-		WatchUi.requestUpdate();
 	}
 
 	function createNumberPattern(count) {

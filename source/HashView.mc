@@ -39,11 +39,8 @@ class HashView extends Ui.View {
   }
 
   function onUpdate(dc) {
-  	dc.setColor( Gfx.COLOR_BLACK, Gfx.COLOR_BLACK );
-      dc.clear();
-      dc.setColor( Gfx.COLOR_WHITE, Gfx.COLOR_TRANSPARENT );
-      if (text != null) {
-      	dc.drawText(dc.getWidth()/2, dc.getHeight()*0.3, Gfx.FONT_SMALL, text, Gfx.TEXT_JUSTIFY_CENTER);
-      }
+    if (text != null) {
+    	dc.drawText(dc.getWidth()/2, dc.getHeight()*0.3, Gfx.FONT_SMALL, text, Gfx.TEXT_JUSTIFY_CENTER);
+    }
   }
 }

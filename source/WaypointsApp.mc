@@ -23,9 +23,7 @@ class ScreenClearingView extends Ui.View {
   }
 
 	function onLayout(dc) {
-		dc.setColor( Gfx.COLOR_BLACK, Gfx.COLOR_BLACK );
-	  dc.clear();
-	  dc.setColor( Gfx.COLOR_WHITE, Gfx.COLOR_TRANSPARENT );
-		Ui.pushView(new HashPicker(), new HashPickerDelegate(), Ui.SLIDE_DOWN);
+		Ui.pushView(new HashPickerView(), new HashPickerDelegate(), Ui.SLIDE_DOWN);
+    return true;
 	}
 }
