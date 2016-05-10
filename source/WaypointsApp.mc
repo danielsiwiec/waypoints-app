@@ -11,19 +11,19 @@ class WaypointsApp extends App.AppBase {
     }
 
     function getInitialView() {
-      return [ new ScreenClearingView() ];
+      return [ new StartView() ];
     }
 
 }
 
-class ScreenClearingView extends Ui.View {
+class StartView extends Ui.View {
 
   function initialize() {
     View.initialize();
   }
 
 	function onLayout(dc) {
-		Ui.pushView(new HashPickerView(), new HashPickerDelegate(), Ui.SLIDE_DOWN);
+		Ui.pushView(new HashPickerView(), new HashPickerDelegate(), Ui.SLIDE_IMMEDIATE);
     return true;
 	}
 }

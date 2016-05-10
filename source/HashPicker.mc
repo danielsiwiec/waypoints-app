@@ -15,6 +15,12 @@ class HashPickerView extends Ui.Picker {
 		}
 		return digits;
 	}
+
+	function onUpdate(dc) {
+		dc.setColor( Gfx.COLOR_BLACK, Gfx.COLOR_BLACK );
+    dc.clear();
+    dc.setColor( Gfx.COLOR_WHITE, Gfx.COLOR_TRANSPARENT );
+  }
 }
 
 class HashPickerDelegate extends Ui.PickerDelegate {
@@ -33,7 +39,7 @@ class HashPickerDelegate extends Ui.PickerDelegate {
 
 	function onAccept(values) {
       hash = joinArray(values);
-      Ui.pushView(new HashView(), new HashDelegate(), Ui.SLIDE_DOWN );
+      Ui.switchToView(new HashView(), new HashDelegate(), Ui.SLIDE_IMMEDIATE );
   }
 
   function onCancel() {
