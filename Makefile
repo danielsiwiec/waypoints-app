@@ -2,7 +2,7 @@ include props.mk
 
 sources = `find source -name '*.mc'`
 resources = `find resources -name '*.xml' | tr '\n' ':' | sed 's/.$$//'`
-SDK_HOME = /Users/dsiwiec/connect-iq-sdk-1.2.6
+SDK_HOME = /Users/dsiwiec/connectiq-sdk-mac-1.2.9
 
 build:
 	monkeyc --warn --output bin/$(APPNAME).prg -m manifest.xml \
