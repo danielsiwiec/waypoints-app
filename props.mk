@@ -1,2 +1,2 @@
-APPNAME = waypoints
+APPNAME = sendpoints
 DEVICE = fenix3
