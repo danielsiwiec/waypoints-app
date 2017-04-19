@@ -42,7 +42,7 @@ class HashDelegate extends Ui.InputDelegate {
 		InputDelegate.initialize();
 	}
 
-	function onKey(){
+	function onKey(event){
 		System.exit();
     return true;
 	}
