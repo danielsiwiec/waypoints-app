@@ -23,7 +23,15 @@ class HashView extends Ui.View {
   }
 
   function onShow() {
-  	Comms.makeJsonRequest("https://garmin-waypoints.herokuapp.com/locations/" + hash, null, null, method(:callback));
+		var url = "https://garmin-waypoints.herokuapp.com/locations/" + hash;
+		var options = {
+			:method => Communications.HTTP_REQUEST_METHOD_GET,
+			:headers => {
+			       "Content-Type" => Communications.REQUEST_CONTENT_TYPE_JSON},
+			:responseType => Communications.HTTP_RESPONSE_CONTENT_TYPE_JSON
+		};
+
+  	Comms.makeWebRequest(url, null, options, method(:callback));
   }
 
   function onUpdate(dc) {
