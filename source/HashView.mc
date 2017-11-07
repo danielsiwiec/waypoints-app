@@ -13,12 +13,16 @@ class HashView extends Ui.View {
 	}
 
   function callback(responseCode, data){
-  	var lat = data["geo"]["lat"];
-  	var long = data["geo"]["long"];
-  	var name = data["name"];
-  	var location = new Position.Location({:latitude => lat, :longitude => long, :format => :degrees});
-  	text = "Location\n" + name + "\nadded.";
-  	PersistedLocations.persistLocation(location, {:name => name});
+		if (responseCode == 200) {
+			var lat = data["geo"]["lat"];
+			var long = data["geo"]["long"];
+			var name = data["name"];
+			var location = new Position.Location({:latitude => lat, :longitude => long, :format => :degrees});
+			text = "Location\n" + name + "\nadded.";
+			PersistedLocations.persistLocation(location, {:name => name});
+		} else {
+			text = "Comms error or \nwrong hash";
+		}
   	WatchUi.requestUpdate();
   }
 
@@ -31,7 +35,12 @@ class HashView extends Ui.View {
 			:responseType => Communications.HTTP_RESPONSE_CONTENT_TYPE_JSON
 		};
 
-  	Comms.makeWebRequest(url, null, options, method(:callback));
+		try {
+			Comms.makeWebRequest(url, null, options, method(:callback));
+		} catch (ex) {
+			System.println( "Error" );
+			System.println(ex);
+		}
   }
 
   function onUpdate(dc) {
