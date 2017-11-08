@@ -35,11 +35,10 @@ class HashView extends Ui.View {
 			:responseType => Communications.HTTP_RESPONSE_CONTENT_TYPE_JSON
 		};
 
-		try {
+		if (Comms has :makeWebRequest ) {
 			Comms.makeWebRequest(url, null, options, method(:callback));
-		} catch (ex) {
-			System.println( "Error" );
-			System.println(ex);
+		} else {
+			Comms.makeJsonRequest(url, null, options, method(:callback));
 		}
   }
 
