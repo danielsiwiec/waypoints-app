@@ -5,11 +5,6 @@ class DigitFactory extends Ui.PickerFactory {
     hidden var mFormatString;
     hidden var mFont;
 
-    function getIndex(value) {
-        var index = (value / mIncrement) - mStart;
-        return index;
-    }
-
     function initialize() {
         mFont = Gfx.FONT_NUMBER_HOT;
         mFormatString = "%d";
