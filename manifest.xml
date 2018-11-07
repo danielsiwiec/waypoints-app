@@ -23,6 +23,7 @@
             <iq:product id="fenix5splus"/>
             <iq:product id="fenix5plus"/>
             <iq:product id="vivoactive3"/>
+            <iq:product id="vivoactive3m"/>
         </iq:products>
 
         <iq:permissions>
