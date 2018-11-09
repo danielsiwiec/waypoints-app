@@ -1,3 +1,4 @@
 .project
 bin/
 *.prg.debug.xml
+.DS_Store
