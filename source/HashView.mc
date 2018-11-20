@@ -1,7 +1,6 @@
 using Toybox.WatchUi as Ui;
 using Toybox.Communications as Comms;
 using Toybox.Position as Position;
-using Toybox.PersistedLocations as PersistedLocations;
 using Toybox.Graphics as Gfx;
 
 class HashView extends Ui.View {
@@ -19,7 +18,15 @@ class HashView extends Ui.View {
 			var name = data["name"];
 			var location = new Position.Location({:latitude => lat, :longitude => long, :format => :degrees});
 			text = "Location\n" + name + "\nadded.";
-			PersistedLocations.persistLocation(location, {:name => name});
+
+			if (Toybox has :PersistedContent) {
+				Toybox.PersistedContent.saveWaypoint(location, {:name => name});
+			} else if (Toybox has :PersistedLocations) {
+				Toybox.PersistedLocations.persistLocation(location, {:name => name});
+			} else {
+				text = "No wypt API";
+			}
+			
 		} else {
 			text = "Comms error or \nwrong hash";
 		}
@@ -37,8 +44,10 @@ class HashView extends Ui.View {
 
 		if (Comms has :makeWebRequest ) {
 			Comms.makeWebRequest(url, null, options, method(:callback));
-		} else {
+		} else if (Comms has :makeJsonRequest ) {
 			Comms.makeJsonRequest(url, null, options, method(:callback));
+		} else {
+			text = "No comms";
 		}
   }
 

@@ -22,13 +22,12 @@
             <iq:product id="fenix5x"/>
             <iq:product id="fenix5xplus"/>
             <iq:product id="fenixchronos"/>
-            <iq:product id="vivoactive3"/>
-            <iq:product id="vivoactive3m"/>
         </iq:products>
 
         <iq:permissions>
         	<iq:uses-permission id="Communications"/>
         	<iq:uses-permission id="PersistedLocations"/>
+        	<iq:uses-permission id="PersistedContent"/>
         	<iq:uses-permission id="Positioning"/>
         </iq:permissions>
 
