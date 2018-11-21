@@ -5,6 +5,7 @@ class Analytics {
   var http;
   var url = "https://www.google-analytics.com/collect";
   var device;
+  var analyticsOn = true;
 
   function initialize() {
     http = new Http();
@@ -26,7 +27,9 @@ class Analytics {
   }
 
   function page(name) {
-    http.post(url, bodyBuilder(page), method(:empty));
+    if (analyticsOn) {
+      http.post(url, bodyBuilder(page), method(:empty));
+    }
   }
 
   function empty(responseCode, data) {
