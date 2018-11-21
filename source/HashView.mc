@@ -36,7 +36,7 @@ class HashView extends Ui.View {
   }
 
   function onShow() {
-		analytics.page("HashView");
+		analytics.screen("HashView");
 		var url = "https://garmin-waypoints.herokuapp.com/locations/" + hash;
 		try {
 			http.get(url, method(:callback));

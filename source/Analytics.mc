@@ -12,23 +12,23 @@ class Analytics {
     device = System.getDeviceSettings();
   }
 
-  function bodyBuilder(page) {
+  function bodyBuilder(screenName) {
     var body = {
       "v" => "1",
       "t" => "screenview",
       "tid" => "UA-77110226-1",
       "cid" => device.uniqueIdentifier,
       "an" => "sendpoints",
-      "av" => "1.1.8",
-      "cd" => page
+      "av" => "1.1.9",
+      "cd" => screenName
     };
 
     return body;
   }
 
-  function page(name) {
+  function screen(screenName) {
     if (analyticsOn) {
-      http.post(url, bodyBuilder(page), method(:empty));
+      http.post(url, bodyBuilder(screenName), method(:empty));
     }
   }
 

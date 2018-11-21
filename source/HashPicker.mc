@@ -3,10 +3,7 @@ using Toybox.Graphics as Gfx;
 
 class HashPickerView extends Ui.Picker {
 
-	var analytics;
-
 	function initialize(){
-		analytics = new Analytics();
 		var title = new Ui.Text({:text=>"HASH", :locX=>Ui.LAYOUT_HALIGN_CENTER, :locY=>Ui.LAYOUT_VALIGN_TOP, :color=>Gfx.COLOR_WHITE});
 		Ui.Picker.initialize({:title => title,:pattern => createNumberPattern(4)});
 	}
@@ -17,10 +14,6 @@ class HashPickerView extends Ui.Picker {
 			digits[i] = new DigitFactory();
 		}
 		return digits;
-	}
-
-	function onShow() {
-		analytics.page("HashPicker");
 	}
 
 	function onUpdate(dc) {
