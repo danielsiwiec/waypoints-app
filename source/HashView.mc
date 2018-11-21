@@ -1,14 +1,19 @@
 using Toybox.WatchUi as Ui;
-using Toybox.Communications as Comms;
 using Toybox.Position as Position;
 using Toybox.Graphics as Gfx;
 
 class HashView extends Ui.View {
 
 	var text;
+	var http;
+	var locationStore;
+	var analytics;
 
 	function initialize() {
 		View.initialize();
+		http = new Http();
+		locationStore = new LocationStore();
+		analytics = new Analytics();
 	}
 
   function callback(responseCode, data){
@@ -18,15 +23,12 @@ class HashView extends Ui.View {
 			var name = data["name"];
 			var location = new Position.Location({:latitude => lat, :longitude => long, :format => :degrees});
 			text = "Location\n" + name + "\nadded.";
-
-			if (Toybox has :PersistedContent) {
-				Toybox.PersistedContent.saveWaypoint(location, {:name => name});
-			} else if (Toybox has :PersistedLocations) {
-				Toybox.PersistedLocations.persistLocation(location, {:name => name});
-			} else {
+			try {
+				locationStore.save(location, {:name => name});
+			} catch (ex) {
+				System.println(ex.getErrorMessage());
 				text = "No wypt API";
 			}
-			
 		} else {
 			text = "Comms error or \nwrong hash";
 		}
@@ -34,19 +36,12 @@ class HashView extends Ui.View {
   }
 
   function onShow() {
+		analytics.page("HashView");
 		var url = "https://garmin-waypoints.herokuapp.com/locations/" + hash;
-		var options = {
-			:method => Communications.HTTP_REQUEST_METHOD_GET,
-			:headers => {
-			       "Content-Type" => Communications.REQUEST_CONTENT_TYPE_JSON},
-			:responseType => Communications.HTTP_RESPONSE_CONTENT_TYPE_JSON
-		};
-
-		if (Comms has :makeWebRequest ) {
-			Comms.makeWebRequest(url, null, options, method(:callback));
-		} else if (Comms has :makeJsonRequest ) {
-			Comms.makeJsonRequest(url, null, options, method(:callback));
-		} else {
+		try {
+			http.get(url, method(:callback));
+		} catch (ex) {
+			System.println(ex.getErrorMessage());
 			text = "No comms";
 		}
   }
