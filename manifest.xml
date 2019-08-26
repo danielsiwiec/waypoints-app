@@ -25,6 +25,11 @@
             <iq:product id="fenix5x"/>
             <iq:product id="fenix5xplus"/>
             <iq:product id="fenixchronos"/>
+            <iq:product id="marqathlete"/>
+            <iq:product id="marqdriver"/>
+            <iq:product id="marqexpedition"/>
+            <iq:product id="marqaviator"/>
+            <iq:product id="marqcaptain"/>
         </iq:products>
 
         <iq:permissions>
