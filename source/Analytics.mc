@@ -13,11 +13,20 @@ class Analytics {
   }
 
   function bodyBuilder(screenName) {
+
+    var uniqueIdentifier;
+
+    if (device has :uniqueIdentifier) {
+      uniqueIdentifier = device.uniqueIdentifier;
+    } else {
+      uniqueIdentifier = "default";
+    }
+
     var body = {
       "v" => "1",
       "t" => "screenview",
       "tid" => "UA-77110226-1",
-      "cid" => device.uniqueIdentifier,
+      "cid" => uniqueIdentifier,
       "an" => "sendpoints",
       "av" => "1.1.9",
       "cd" => screenName
