@@ -36,6 +36,8 @@
             <iq:product id="marqexpedition"/>
             <iq:product id="marqaviator"/>
             <iq:product id="marqcaptain"/>
+            <iq:product id="vivoactive4"/>
+            <iq:product id="vivoactive4s"/>
         </iq:products>
 
         <iq:permissions>
