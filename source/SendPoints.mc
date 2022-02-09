@@ -4,7 +4,7 @@ using Toybox.Graphics as Gfx;
 
 var hash = "";
 
-class WaypointsApp extends App.AppBase {
+class SendPoints extends App.AppBase {
 
     function initialize() {
       AppBase.initialize();
