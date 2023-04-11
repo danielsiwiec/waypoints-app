@@ -5,10 +5,9 @@ class Http {
   function _req(url, params, options, callback) {
     if (Comms has :makeWebRequest ) {
 			Comms.makeWebRequest(url, params, options, callback);
-		} else if (Comms has :makeJsonRequest ) {
-			Comms.makeJsonRequest(url, params, options, callback);
 		} else {
-      throw new Toybox.Lang.Exception("No Communication API");
+      System.println("No Communication API");
+      throw new Toybox.Lang.Exception();
     }
   }
 

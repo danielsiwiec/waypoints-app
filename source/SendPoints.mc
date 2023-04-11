@@ -11,19 +11,7 @@ class SendPoints extends App.AppBase {
     }
 
     function getInitialView() {
-      return [ new StartView() ];
+      return [new HashPickerView(), new HashPickerDelegate()];
     }
 
-}
-
-class StartView extends Ui.View {
-
-  function initialize() {
-    View.initialize();
-  }
-
-	function onLayout(dc) {
-		Ui.pushView(new HashPickerView(), new HashPickerDelegate(), Ui.SLIDE_IMMEDIATE);
-    return true;
-	}
 }

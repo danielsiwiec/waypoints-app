@@ -1,6 +1,7 @@
 using Toybox.WatchUi as Ui;
 using Toybox.Position as Position;
 using Toybox.Graphics as Gfx;
+import Toybox.Lang;
 
 class HashView extends Ui.View {
 
@@ -16,7 +17,7 @@ class HashView extends Ui.View {
 		analytics = new Analytics();
 	}
 
-  function callback(responseCode, data){
+  function callback(responseCode, data as Dictionary<String, Dictionary<String, Double>>){
 		if (responseCode == 200) {
 			var lat = data["geo"]["lat"];
 			var long = data["geo"]["long"];
@@ -64,6 +65,5 @@ class HashDelegate extends Ui.InputDelegate {
 
 	function onKey(event){
 		System.exit();
-    return true;
 	}
 }

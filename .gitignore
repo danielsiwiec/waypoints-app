@@ -2,3 +2,4 @@
 bin/
 *.prg.debug.xml
 .DS_Store
+.vscode/
